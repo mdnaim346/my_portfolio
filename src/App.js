@@ -358,7 +358,7 @@ function App() {
             aria-label="Profile summary"
           >
             <div className="profile-image-wrap">
-              <img src="/profile.jpg" alt="Naim Reza" />
+              <img src="/profile.png" alt="Naim Reza" />
             </div>
             <div className="profile-details">
               <span className="availability">Available for selected builds</span>
