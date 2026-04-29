@@ -440,6 +440,10 @@ function App() {
                   <span>{project.category}</span>
                   <h3>{project.title}</h3>
                   <p>{project.desc}</p>
+                  <div className="project-card-footer">
+                    <strong>{project.impact}</strong>
+                    <span>{project.stack.slice(0, 2).join(' + ')}</span>
+                  </div>
                 </motion.button>
               ))}
             </div>
@@ -456,6 +460,11 @@ function App() {
                   aria-label={`${selectedProject.title} details`}
                 >
                   <SmartProjectImage project={selectedProject} compact />
+                  <div className="case-meta">
+                    <span>{selectedProject.category}</span>
+                    <span>{selectedProject.stack.length} tools</span>
+                    <span>{sourceLabel}</span>
+                  </div>
                   <span className="case-label">Focused case study</span>
                   <h3>{selectedProject.title}</h3>
                   <p>{selectedProject.desc}</p>
