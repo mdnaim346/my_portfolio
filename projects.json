@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sale-approval",
+    "title": "Sale Order Approval Workflow",
+    "category": "ERP",
+    "desc": "Multi-level approval flows for Odoo sales teams with automated notifications and audit-ready status tracking.",
+    "image": "/project1.jpg",
+    "impact": "Reduced approval delays by 42%",
+    "stack": ["Odoo", "Python", "PostgreSQL", "XML", "JavaScript"],
+    "role": "Architecture, module development, testing, deployment"
+  },
+  {
+    "id": "inventory-intelligence",
+    "title": "AI Powered Inventory System",
+    "category": "Automation",
+    "desc": "Forecasting-focused inventory planning that helps teams detect demand shifts and reduce stock waste.",
+    "image": "/project2.jpg",
+    "impact": "Improved reorder visibility across SKUs",
+    "stack": ["Python", "Odoo", "ML workflows", "REST APIs"],
+    "role": "Prediction flow, dashboard design, ERP integration"
+  },
+  {
+    "id": "team-operations",
+    "title": "Task Management System",
+    "category": "Product",
+    "desc": "Role-based task operations with permissions, progress visibility, and clean handoffs between teams.",
+    "image": "/project3.jpg",
+    "impact": "Created one source of truth for delivery teams",
+    "stack": ["React", "Node.js", "PostgreSQL", "Odoo RPC"],
+    "role": "Full stack development and workflow modeling"
+  },
+  {
+    "id": "commerce-erp",
+    "title": "Ecommerce ERP Integration",
+    "category": "Commerce",
+    "desc": "Customized garment workflow covering order processing, cloth tracking, and fulfillment automation.",
+    "image": "/project4.jpg",
+    "impact": "Automated repeat manual operation steps",
+    "stack": ["Odoo", "Python", "Website Sale", "Accounting"],
+    "role": "Module customization, integrations, performance tuning"
+  },
+  {
+    "id": "project-control",
+    "title": "Project Management System",
+    "category": "Product",
+    "desc": "Project tracking with assignment flows, milestone status, and manager-level progress monitoring.",
+    "image": "/project1.jpg",
+    "impact": "Improved team planning and delivery clarity",
+    "stack": ["React", "Express", "PostgreSQL", "Odoo"],
+    "role": "Frontend experience, API design, reporting logic"
+  },
+  {
+    "id": "support-chatbot",
+    "title": "AI Chat Bot",
+    "category": "AI",
+    "desc": "Customer support assistant connected to business systems for faster answers and cleaner escalation.",
+    "image": "/project2.jpg",
+    "impact": "Shortened first response time for common queries",
+    "stack": ["Python", "NLP", "REST APIs", "Odoo"],
+    "role": "Conversation flow, integration, admin controls"
+  }
+]
