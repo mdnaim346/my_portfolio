@@ -392,7 +392,31 @@ function App() {
             transition={{ duration: 0.7 }}
           >
             <p className="eyebrow">Odoo ERP, automation, React dashboards</p>
-            <h1 id="hero-title">{profile.name}</h1>
+            <div className="hero-title-area">
+              <h1 id="hero-title">{profile.name}</h1>
+              <motion.div
+                className="robot-greeting"
+                initial={{ opacity: 0, y: 18, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.55, delay: 0.35 }}
+                aria-label="AI assistant greeting"
+              >
+                <div className="robot-figure" aria-hidden="true">
+                  <span className="robot-antenna" />
+                  <div className="robot-head">
+                    <span className="robot-eye" />
+                    <span className="robot-eye" />
+                  </div>
+                  <div className="robot-body">
+                    <span />
+                    <span />
+                  </div>
+                </div>
+                <div className="robot-message">
+                  <span>Hi, I am Naim's AI helper.</span>
+                </div>
+              </motion.div>
+            </div>
             <p className="hero-role">{profile.role}</p>
             <p className="hero-lede">{profile.headline}</p>
 
@@ -412,29 +436,6 @@ function App() {
                   <span>{stat.label}</span>
                 </div>
               ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="robot-greeting"
-            initial={{ opacity: 0, y: 18, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.55, delay: 0.35 }}
-            aria-label="AI assistant greeting"
-          >
-            <div className="robot-figure" aria-hidden="true">
-              <span className="robot-antenna" />
-              <div className="robot-head">
-                <span className="robot-eye" />
-                <span className="robot-eye" />
-              </div>
-              <div className="robot-body">
-                <span />
-                <span />
-              </div>
-            </div>
-            <div className="robot-message">
-              <span>Hi, I am Naim's AI helper.</span>
             </div>
           </motion.div>
 

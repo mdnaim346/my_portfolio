@@ -223,29 +223,36 @@ select {
 .hero-section {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.75fr);
-  gap: 34px;
+  grid-template-columns: minmax(0, 1.4fr) 340px;
+  gap: 40px;
   align-items: center;
   min-height: 78vh;
   padding: 56px 0 74px;
 }
 
+.hero-title-area {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 10px;
+}
+
 .robot-greeting {
-  position: absolute;
-  top: 24%;
-  left: min(47vw, 760px);
+  position: relative;
   z-index: 4;
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 12px;
   align-items: center;
-  max-width: 260px;
+  width: 300px;
+  max-width: 320px;
   padding: 14px;
   border: 1px solid rgba(15, 118, 110, 0.2);
   border-radius: 8px;
   background: rgba(237, 244, 247, 0.92);
   box-shadow: 0 18px 44px rgba(16, 24, 32, 0.14);
   backdrop-filter: blur(16px);
+  margin-top: 6px;
 }
 
 .robot-greeting::before {
@@ -340,11 +347,11 @@ select {
 
 .robot-message span {
   display: inline-block;
-  max-width: 180px;
+  max-width: 240px;
   overflow: hidden;
   border-right: 2px solid var(--teal);
   white-space: nowrap;
-  animation: robot-type 3.2s steps(24, end) infinite alternate, robot-cursor 900ms step-end infinite;
+  animation: robot-type 3.2s steps(28, end) infinite alternate, robot-cursor 900ms step-end infinite;
 }
 
 @keyframes robot-type {
@@ -353,7 +360,7 @@ select {
   }
 
   to {
-    width: 24ch;
+    width: 28ch;
   }
 }
 
@@ -376,7 +383,7 @@ select {
 }
 
 .hero-copy h1 {
-  margin: 10px 0 0;
+  margin: 0;
   font-size: 5.2rem;
   line-height: 0.96;
   letter-spacing: 0;
@@ -1308,6 +1315,10 @@ select {
     grid-template-columns: 1fr;
   }
 
+  .hero-title-area {
+    flex-wrap: wrap;
+  }
+
   .hero-section {
     min-height: auto;
   }
@@ -1318,7 +1329,7 @@ select {
     left: auto;
     width: fit-content;
     max-width: min(100%, 320px);
-    margin: -34px 0 10px;
+    margin: 10px 0;
   }
 
   .profile-panel,
@@ -1446,12 +1457,12 @@ select {
 
   .robot-greeting {
     grid-template-columns: auto 1fr;
-    margin-top: -22px;
+    margin: 10px 0;
     padding: 12px;
   }
 
   .robot-message span {
-    max-width: 160px;
+    max-width: 220px;
   }
 
   .hero-copy h1 {
