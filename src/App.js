@@ -23,6 +23,18 @@ const stats = [
 
 const fallbackProjects = [
   {
+    id: 'online-training-academy',
+    title: 'Online Training Academy',
+    category: 'Training',
+    desc:
+      'Complete Odoo training academy module with courses, trainers, public enrollment, approval workflows, attendance, certificates, portal pages, payments, Stripe Checkout, reports, dashboards, and email automation.',
+    image: '/project4.jpg',
+    impact: 'Built an end-to-end academy management workflow',
+    stack: ['Odoo', 'Python', 'XML', 'Portal', 'Stripe', 'QWeb'],
+    role: 'Module architecture, backend models, website portal, payment flow, reports, and dashboard logic',
+    repo: 'https://github.com/mdnaim346/Online-Training-Academy',
+  },
+  {
     id: 'sale-approval',
     title: 'Sale Order Approval Workflow',
     category: 'ERP',
@@ -155,6 +167,11 @@ const visualThemes = {
     className: 'theme-ai',
     label: 'AI',
     pattern: ['Prompt', 'Intent', 'Answer', 'Learn'],
+  },
+  Training: {
+    className: 'theme-training',
+    label: 'LMS',
+    pattern: ['Course', 'Enroll', 'Attend', 'Certify'],
   },
 };
 
@@ -300,9 +317,57 @@ function App() {
     `Hi Naim,\n\nI would like to discuss: ${contact.scope}\n\nName: ${contact.name}\nEmail: ${contact.email}`
   );
   const mailtoHref = `mailto:${profile.email}?subject=${mailSubject}&body=${mailBody}`;
+  const motionBullets = useMemo(() => {
+    const colors = ['#0f766e', '#2563eb', '#64748b', '#b7791f'];
+    const edgePoint = (edge) => {
+      if (edge === 'left') {
+        return { x: -8, y: 8 + Math.random() * 84 };
+      }
+      if (edge === 'right') {
+        return { x: 108, y: 8 + Math.random() * 84 };
+      }
+      if (edge === 'top') {
+        return { x: 8 + Math.random() * 84, y: -8 };
+      }
+      return { x: 8 + Math.random() * 84, y: 108 };
+    };
+
+    return Array.from({ length: 18 }, (_, index) => {
+      const edges = ['left', 'right', 'top', 'bottom'];
+      const startEdge = edges[index % edges.length];
+      const endEdge = edges[(index + 1 + Math.floor(Math.random() * 3)) % edges.length];
+      const start = edgePoint(startEdge);
+      const end = edgePoint(endEdge);
+      const mid = {
+        x: (start.x + end.x) / 2 + (Math.random() * 42 - 21),
+        y: (start.y + end.y) / 2 + (Math.random() * 42 - 21),
+      };
+
+      return {
+        id: `motion-bullet-${index + 1}`,
+        style: {
+          '--from-x': `${start.x}vw`,
+          '--from-y': `${start.y}vh`,
+          '--mid-x': `${mid.x}vw`,
+          '--mid-y': `${mid.y}vh`,
+          '--to-x': `${end.x}vw`,
+          '--to-y': `${end.y}vh`,
+          '--duration': `${7 + Math.random() * 9}s`,
+          '--delay': `${Math.random() * -12}s`,
+          '--size': `${7 + Math.random() * 5}px`,
+          '--bullet-color': colors[index % colors.length],
+        },
+      };
+    });
+  }, []);
 
   return (
     <div className="portfolio-shell" id="top">
+      <div className="motion-bullets" aria-hidden="true">
+        {motionBullets.map((bullet) => (
+          <span className="motion-bullet" key={bullet.id} style={bullet.style} />
+        ))}
+      </div>
       <header className="site-header">
         <a className="brand-mark" href="#top" aria-label="Naim Reza portfolio home">
           <span>NR</span>
@@ -347,6 +412,29 @@ function App() {
                   <span>{stat.label}</span>
                 </div>
               ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="robot-greeting"
+            initial={{ opacity: 0, y: 18, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.55, delay: 0.35 }}
+            aria-label="AI assistant greeting"
+          >
+            <div className="robot-figure" aria-hidden="true">
+              <span className="robot-antenna" />
+              <div className="robot-head">
+                <span className="robot-eye" />
+                <span className="robot-eye" />
+              </div>
+              <div className="robot-body">
+                <span />
+                <span />
+              </div>
+            </div>
+            <div className="robot-message">
+              <span>Hi, I am Naim's AI helper.</span>
             </div>
           </motion.div>
 
@@ -481,6 +569,11 @@ function App() {
                     <span>Role</span>
                     <p>{selectedProject.role}</p>
                   </div>
+                  {selectedProject.repo && (
+                    <a className="case-link" href={selectedProject.repo} target="_blank" rel="noreferrer">
+                      View repository
+                    </a>
+                  )}
                 </motion.aside>
               )}
             </AnimatePresence>

@@ -1,5 +1,16 @@
 [
   {
+    "id": "online-training-academy",
+    "title": "Online Training Academy",
+    "category": "Training",
+    "desc": "Complete Odoo training academy module with courses, trainers, public enrollment, approval workflows, attendance, certificates, portal pages, payments, Stripe Checkout, reports, dashboards, and email automation.",
+    "image": "/project4.jpg",
+    "impact": "Built an end-to-end academy management workflow",
+    "stack": ["Odoo", "Python", "XML", "Portal", "Stripe", "QWeb"],
+    "role": "Module architecture, backend models, website portal, payment flow, reports, and dashboard logic",
+    "repo": "https://github.com/mdnaim346/Online-Training-Academy"
+  },
+  {
     "id": "sale-approval",
     "title": "Sale Order Approval Workflow",
     "category": "ERP",
