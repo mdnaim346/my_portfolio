@@ -401,17 +401,7 @@ function App() {
                 transition={{ duration: 0.55, delay: 0.35 }}
                 aria-label="AI assistant greeting"
               >
-                <div className="robot-figure" aria-hidden="true">
-                  <span className="robot-antenna" />
-                  <div className="robot-head">
-                    <span className="robot-eye" />
-                    <span className="robot-eye" />
-                  </div>
-                  <div className="robot-body">
-                    <span />
-                    <span />
-                  </div>
-                </div>
+                <img className="robot-img" src="/robot.png" alt="AI assistant robot avatar" />
                 <div className="robot-message">
                   <span>Hi, I am Naim's AI helper.</span>
                 </div>
