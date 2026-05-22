@@ -1,8 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import './App.css';
-
-const availableProjectImages = ['/project1.jpg', '/project2.jpg', '/project3.jpg', '/project4.jpg'];
 
 const profile = {
   name: 'Naim Reza',
@@ -142,64 +140,6 @@ const timeline = [
   },
 ];
 
-const visualThemes = {
-  ERP: {
-    className: 'theme-erp',
-    label: 'ERP',
-    pattern: ['SO', 'PO', 'INV', 'CRM'],
-  },
-  Automation: {
-    className: 'theme-automation',
-    label: 'AUTO',
-    pattern: ['Trigger', 'Rule', 'Action', 'Report'],
-  },
-  Product: {
-    className: 'theme-product',
-    label: 'APP',
-    pattern: ['Board', 'Role', 'Sprint', 'Status'],
-  },
-  Commerce: {
-    className: 'theme-commerce',
-    label: 'SHOP',
-    pattern: ['Order', 'Stock', 'Cart', 'Pay'],
-  },
-  AI: {
-    className: 'theme-ai',
-    label: 'AI',
-    pattern: ['Prompt', 'Intent', 'Answer', 'Learn'],
-  },
-  Training: {
-    className: 'theme-training',
-    label: 'LMS',
-    pattern: ['Course', 'Enroll', 'Attend', 'Certify'],
-  },
-};
-
-function imageFor(project, index) {
-  const incoming = project.image || project.img;
-  return availableProjectImages.includes(incoming)
-    ? incoming
-    : availableProjectImages[index % availableProjectImages.length];
-}
-
-function projectInitials(title) {
-  return title
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 4)
-    .map((word) => word[0])
-    .join('')
-    .toUpperCase();
-}
-
-function titleKeywords(title) {
-  return title
-    .replace(/[^a-zA-Z0-9 ]/g, ' ')
-    .split(/\s+/)
-    .filter((word) => word.length > 2)
-    .slice(0, 3);
-}
-
 function normalizeProject(project, index) {
   const fallback = fallbackProjects[index % fallbackProjects.length];
 
@@ -209,47 +149,11 @@ function normalizeProject(project, index) {
     id: project.id || fallback.id,
     category: project.category || fallback.category,
     desc: project.desc || fallback.desc,
-    image: imageFor(project, index),
+    image: project.image || project.img || fallback.image,
     impact: project.impact || fallback.impact,
     stack: Array.isArray(project.stack) && project.stack.length ? project.stack : fallback.stack,
     role: project.role || fallback.role,
   };
-}
-
-function SmartProjectImage({ project, compact = false }) {
-  const theme = visualThemes[project.category] || visualThemes.Product;
-  const keywords = titleKeywords(project.title);
-  const initials = projectInitials(project.title);
-
-  return (
-    <div className={`smart-image ${theme.className} ${compact ? 'compact' : ''}`} aria-hidden="true">
-      <div className="smart-image-grid">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="smart-image-header">
-        <span>{theme.label}</span>
-        <span>{project.category}</span>
-      </div>
-      <div className="smart-image-core">
-        <strong>{initials}</strong>
-        <div>
-          {keywords.map((keyword) => (
-            <span key={keyword}>{keyword}</span>
-          ))}
-        </div>
-      </div>
-      <div className="smart-image-flow">
-        {theme.pattern.map((item) => (
-          <span key={item}>{item}</span>
-        ))}
-      </div>
-    </div>
-  );
 }
 
 function App() {
@@ -257,6 +161,7 @@ function App() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedProjectId, setSelectedProjectId] = useState(fallbackProjects[0].id);
   const [sourceLabel, setSourceLabel] = useState('Curated portfolio');
+  const projectDetailsRef = useRef(null);
   const [contact, setContact] = useState({
     name: '',
     email: '',
@@ -311,6 +216,13 @@ function App() {
     const fromFiltered = filteredProjects.find((project) => project.id === selectedProjectId);
     return fromFiltered || filteredProjects[0] || projects[0];
   }, [filteredProjects, projects, selectedProjectId]);
+
+  const handleProjectSelect = (projectId) => {
+    setSelectedProjectId(projectId);
+    window.requestAnimationFrame(() => {
+      projectDetailsRef.current?.scrollIntoView({ behavior: 'auto', block: 'start' });
+    });
+  };
 
   const mailSubject = encodeURIComponent(`Portfolio inquiry from ${contact.name || 'a new client'}`);
   const mailBody = encodeURIComponent(
@@ -525,12 +437,10 @@ function App() {
                   className={project.id === selectedProject?.id ? 'project-card active' : 'project-card'}
                   key={project.id}
                   type="button"
-                  onClick={() => setSelectedProjectId(project.id)}
-                  layout
+                  onClick={() => handleProjectSelect(project.id)}
                   whileHover={{ y: -5 }}
                   transition={{ type: 'spring', stiffness: 260, damping: 24 }}
                 >
-                  <SmartProjectImage project={project} />
                   <span>{project.category}</span>
                   <h3>{project.title}</h3>
                   <p>{project.desc}</p>
@@ -542,18 +452,19 @@ function App() {
               ))}
             </div>
 
-            <AnimatePresence mode="wait">
+            <AnimatePresence initial={false}>
               {selectedProject && (
                 <motion.aside
                   className="case-study-panel"
+                  ref={projectDetailsRef}
+                  id="project-details"
                   key={selectedProject.id}
-                  initial={{ opacity: 0, x: 24 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -24 }}
-                  transition={{ duration: 0.25 }}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -24 }}
+                  transition={{ duration: 0.12 }}
                   aria-label={`${selectedProject.title} details`}
                 >
-                  <SmartProjectImage project={selectedProject} compact />
                   <div className="case-meta">
                     <span>{selectedProject.category}</span>
                     <span>{selectedProject.stack.length} tools</span>
