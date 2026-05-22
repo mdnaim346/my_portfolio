@@ -397,8 +397,23 @@ function App() {
               <motion.div
                 className="robot-greeting"
                 initial={{ opacity: 0, y: 18, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.55, delay: 0.35 }}
+                animate={{
+                  opacity: 1,
+                  x: [0, 5, 0],
+                  y: [0, -8, 0],
+                  scale: 1,
+                }}
+                transition={{
+                  opacity: { duration: 0.55, delay: 0.35 },
+                  scale: { duration: 0.55, delay: 0.35 },
+                  x: { duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 0.9 },
+                  y: { duration: 3.4, repeat: Infinity, ease: 'easeInOut', delay: 0.9 },
+                }}
+                drag
+                dragConstraints={{ top: -24, right: 24, bottom: 24, left: -24 }}
+                dragElastic={0.35}
+                whileHover={{ scale: 1.03 }}
+                whileDrag={{ scale: 1.06 }}
                 aria-label="AI assistant greeting"
               >
                 <img className="robot-img" src="/robot.png" alt="AI assistant robot avatar" />
