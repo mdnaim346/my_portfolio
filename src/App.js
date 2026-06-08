@@ -156,6 +156,15 @@ function normalizeProject(project, index) {
   };
 }
 
+function ProjectImage({ project, compact = false }) {
+  return (
+    <div className={`project-image${compact ? ' compact' : ''}`}>
+      <img src={project.image} alt={`${project.title} project screenshot`} loading={compact ? 'lazy' : 'eager'} />
+      <span>{project.category}</span>
+    </div>
+  );
+}
+
 function App() {
   const [projects, setProjects] = useState(fallbackProjects);
   const [activeCategory, setActiveCategory] = useState('All');
@@ -441,6 +450,7 @@ function App() {
                   whileHover={{ y: -5 }}
                   transition={{ type: 'spring', stiffness: 260, damping: 24 }}
                 >
+                  <ProjectImage project={project} compact />
                   <span>{project.category}</span>
                   <h3>{project.title}</h3>
                   <p>{project.desc}</p>
@@ -470,6 +480,7 @@ function App() {
                     <span>{selectedProject.stack.length} tools</span>
                     <span>{sourceLabel}</span>
                   </div>
+                  <ProjectImage project={selectedProject} />
                   <span className="case-label">Focused case study</span>
                   <h3>{selectedProject.title}</h3>
                   <p>{selectedProject.desc}</p>
